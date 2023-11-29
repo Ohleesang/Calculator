@@ -1,6 +1,6 @@
 import java.util.*
 
-class Calculator {
+open class Calculator {
     var num1 = 0
     var num2 = 0
     var operator =' '
@@ -34,18 +34,65 @@ class Calculator {
         calcul() //연산자에 따라 계산 실행
     }
     //연산자에 따라 계산 시행
-    fun calcul(){
+    open fun calcul(){
         when(operator){
-            '*' -> println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
-            '/' -> println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
             '+' -> println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
             '-' -> println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
+            '*' -> println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
+            '/' -> println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
+
         }
     }
 }
+//자식 클래스
+class AddOperation:Calculator(){
 
+    override fun calcul(){
+        if(operator=='+')
+            println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
+        else
+            println("덧셈이 아닙니다.")
+    }
+
+}
+
+class SubstractOperation:Calculator(){
+
+    override fun calcul(){
+        if(operator=='-')
+            println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
+        else
+            println("뺄셈이 아닙니다.")
+    }
+}
+
+class MultiplyOperation:Calculator(){
+
+    override fun calcul(){
+        if(operator=='*')
+            println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
+        else
+            println("곱셈이 아닙니다.")
+    }
+
+}
+
+
+class DivideOperation:Calculator(){
+    override fun calcul(){
+        if(operator=='/')
+            println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
+        else
+            println("나눗셈이 아닙니다.")
+    }
+
+}
 fun main() {
     var cal = Calculator()
+    var add = AddOperation()
+    var sub = SubstractOperation()
+    var mul = MultiplyOperation()
+    var div = DivideOperation()
 //    cal.processStr("12+22")
 //    cal.processStr("132-111")
 //    cal.processStr("132*111")
@@ -56,6 +103,10 @@ fun main() {
 
         input = readLine()!!
         cal.processStr(input)
+        add.processStr(input)
+        sub.processStr(input)
+        mul.processStr(input)
+        div.processStr(input)
 
 
     }
