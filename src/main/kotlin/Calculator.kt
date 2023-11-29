@@ -1,29 +1,51 @@
+import java.util.*
 
 class Calculator {
-    //1+(2*4)/2 일때 계산하는 계산기를 만들어보자
+    var num1 = 0
+    var num2 = 0
+    var operator =' '
+    // 2*4 일때 계산하는 계산기를 만들어보자
+
+    // 계산 처리 하는함수
     fun processStr(s :String){
+
         if(s=="") {
             println("값을 입력하시오")
             return
         }
-        var operator = arrayOf("+","-","*","/")
-        //1.s에서 연산자 인 문자를 찾는다
-        var num1 = 0
-        var num2 = 0
-        var x  = mutableListOf<String>()
-        operator.forEach{
-            if(s.contains(it)){
-                x = s.split(it).toMutableList()
+
+        var operArray = arrayOf('*','/','+','-')//우선 처리 순서
+        var list =listOf<String>()
+
+        operArray.forEach{
+            if(s.contains(it))
+            {
+                operator = it
+                list = s.split(it)
+                num1 = list[0].toInt()
+                num2 = list[1].toInt()
             }
         }
-        println(x)
-        //2.연산자 기준으로 값을 처리 한다
-
+        calcul() //연산자에 따라 계산 실행
+    }
+    //계산 시행
+    fun calcul(){
+        when(operator){
+            '*' -> println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
+            '/' -> println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
+            '+' -> println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
+            '-' -> println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
+        }
     }
 }
 
 fun main(){
     var cal = Calculator()
+//    cal.processStr("12+22")
+//    cal.processStr("132-111")
+//    cal.processStr("132*111")
+//    cal.processStr("132/111")
+
     var input :String = ""
     while(true) {
 
@@ -31,6 +53,5 @@ fun main(){
         cal.processStr(input)
 
     }
-
 
 }
