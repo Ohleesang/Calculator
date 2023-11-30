@@ -35,58 +35,94 @@ open class Calculator {
     }
     //연산자에 따라 계산 시행
     open fun calcul(){
-        when(operator){
-            '+' -> println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
-            '-' -> println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
-            '*' -> println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
-            '/' -> println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
+//        when(operator){
+//            '+' -> println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
+//            '-' -> println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
+//            '*' -> println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
+//            '/' -> println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
 
         }
     }
+
+
+//추상 클래스
+interface AbstrackOperation{
+    fun calcul()
+    fun outOperater()
 }
 //자식 클래스
-class AddOperation:Calculator(){
+class AddOperation:Calculator(),AbstrackOperation{
 
+
+    override fun outOperater() {
+        println("이것은 덧셈 계산기입니다.")
+    }
     override fun calcul(){
         if(operator=='+')
             println("${num1} 과 ${num2} 의 덧셈은 ${num1 + num2} 입니다.")
-        else
+        else {
             println("덧셈이 아닙니다.")
+            outOperater()
+        }
     }
+
 
 }
 
-class SubstractOperation:Calculator(){
+class SubstractOperation:Calculator(),AbstrackOperation{
 
+
+    override fun outOperater() {
+        println("이것은 뺄셈 계산기입니다.")
+    }
     override fun calcul(){
         if(operator=='-')
             println("${num1} 과 ${num2} 의 뺄셈은 ${num1 - num2} 입니다.")
-        else
+        else {
             println("뺄셈이 아닙니다.")
+            outOperater()
+        }
     }
 }
 
-class MultiplyOperation:Calculator(){
+class MultiplyOperation:Calculator(),AbstrackOperation {
 
+
+
+    override fun outOperater() {
+        println("이것은 곱셈 계산기입니다.")
+    }
     override fun calcul(){
+
         if(operator=='*')
             println("${num1} 과 ${num2} 의 곱셈은 ${num1 * num2} 입니다.")
-        else
+        else {
             println("곱셈이 아닙니다.")
+            outOperater()
+        }
     }
 
 }
 
 
-class DivideOperation:Calculator(){
+class DivideOperation:Calculator(),AbstrackOperation{
+
+
+    override fun outOperater() {
+        println("이것은 나눗셈 계산기입니다.")
+    }
     override fun calcul(){
         if(operator=='/')
             println("${num1} 과 ${num2} 의 나눗셈은 ${num1 / num2} 입니다.")
-        else
+        else {
             println("나눗셈이 아닙니다.")
+            outOperater()
+        }
     }
 
 }
+
+
 fun main() {
     var cal = Calculator()
     var add = AddOperation()
